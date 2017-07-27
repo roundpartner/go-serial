@@ -12,5 +12,15 @@ type Config struct {
 func WriteConfig() {
 	config := Config{Min: 1}
 	configJson, _ := json.Marshal(config)
-	ioutil.WriteFile("output.json", configJson, 0644)
+	ioutil.WriteFile("config.json", configJson, 0644)
+}
+
+func ReadConfig() *Config {
+    raw, err := ioutil.ReadFile("config.json")
+    if nil != err {
+        panic(err)
+    }
+    config := new(Config)
+    json.Unmarshal(raw, &config)
+    return config
 }
