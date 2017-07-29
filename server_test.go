@@ -7,9 +7,12 @@ import (
     "io/ioutil"
     "encoding/json"
     "time"
+    "os"
+    "io"
 )
 
 func TestStartServerStarts(t *testing.T) {
+    os.Remove("config.json")
     go StartServer()
     time.Sleep(10 * time.Millisecond)
     _, err := http.Get("http://127.0.0.1:53231")

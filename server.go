@@ -6,14 +6,15 @@ import (
     "encoding/json"
 )
 
-var config = Config{Min: 1}
+var config = &Config{}
 
 func StartServer() *http.Server {
+    config = ReadConfig()
+
     http.HandleFunc("/", handler)
     server := &http.Server{Addr: "127.0.0.1:53231"}
     server.ListenAndServe()
     return server
-
 }
 
 func handler(w http.ResponseWriter, r *http.Request) {
@@ -24,4 +25,6 @@ func handler(w http.ResponseWriter, r *http.Request) {
     configJson, _ := json.Marshal(config)
 
     fmt.Fprint(w, string(configJson))
+
+    WriteConfig(*config)
 }
