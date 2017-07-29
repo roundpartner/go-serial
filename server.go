@@ -11,7 +11,7 @@ var config = Config{Min: 1}
 func StartServer() *http.Server {
     http.HandleFunc("/", handler)
     server := &http.Server{Addr: "127.0.0.1:53231"}
-    go server.ListenAndServe()
+    server.ListenAndServe()
     return server
 
 }

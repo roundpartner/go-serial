@@ -10,7 +10,7 @@ import (
 )
 
 func TestStartServerStarts(t *testing.T) {
-    StartServer()
+    go StartServer()
     time.Sleep(10 * time.Millisecond)
     _, err := http.Get("http://127.0.0.1:53231")
     if err != nil {
