@@ -3,6 +3,7 @@ package go_serial
 import (
 	"io/ioutil"
 	"encoding/json"
+    "os"
 )
 
 type Config struct {
@@ -16,11 +17,26 @@ func WriteConfig() {
 }
 
 func ReadConfig() *Config {
-    raw, err := ioutil.ReadFile("config.json")
+    raw, err := ReadConfigFile("config.json")
     if nil != err {
         panic(err)
     }
     config := new(Config)
     json.Unmarshal(raw, &config)
     return config
+}
+
+func ReadConfigFile(filename string) ([]byte, error) {
+    if false == ConfigExists(filename) {
+        return nil, nil
+    }
+    return ioutil.ReadFile(filename)
+}
+
+func ConfigExists(filename string) (bool) {
+    stat, err := os.Stat(filename)
+    if nil != err {
+        return false
+    }
+    return stat.Mode().IsRegular()
 }
