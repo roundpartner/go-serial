@@ -6,10 +6,12 @@ import (
     "strings"
     "io/ioutil"
     "encoding/json"
+    "time"
 )
 
 func TestStartServerStarts(t *testing.T) {
     StartServer()
+    time.Sleep(10 * time.Millisecond)
     _, err := http.Get("http://127.0.0.1:53231")
     if err != nil {
         t.Error(err)
