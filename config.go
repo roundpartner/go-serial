@@ -10,13 +10,15 @@ type Config struct {
 	Min  int `json:"min"`
 }
 
-func WriteConfig(config Config) {
+func WriteConfig(workingDirectory string, config Config) {
+    file := workingDirectory + "config.json"
 	configJson, _ := json.Marshal(config)
-	ioutil.WriteFile("config.json", configJson, 0644)
+	ioutil.WriteFile(file, configJson, 0644)
 }
 
-func ReadConfig() *Config {
-    raw, err := ReadConfigFile("config.json")
+func ReadConfig(workingDirectory string) *Config {
+    file := workingDirectory + "config.json"
+    raw, err := ReadConfigFile(file)
     if nil != err {
         panic(err)
     }

@@ -8,7 +8,7 @@ import (
 func TestWriteConfig(t *testing.T) {
     beforeTest()
     config := Config{Min: 1}
-	WriteConfig(config)
+	WriteConfig("", config)
 }
 
 func TestConfigExists(t *testing.T) {
@@ -43,7 +43,7 @@ func TestReadConfigFileReturnsNil(t *testing.T) {
 
 func TestReadConfig(t *testing.T) {
     beforeTest()
-    config := ReadConfig()
+    config := ReadConfig("",)
     if config.Min != 0 {
         t.Error("Min is not valid")
     }
@@ -52,8 +52,8 @@ func TestReadConfig(t *testing.T) {
 func TestReadConfigAfterWrite(t *testing.T) {
     beforeTest()
     configOriginal := Config{Min: 2017}
-    WriteConfig(configOriginal)
-    configResponse := ReadConfig()
+    WriteConfig("", configOriginal)
+    configResponse := ReadConfig("")
     if configResponse.Min != configOriginal.Min {
         t.Error("Min is not valid")
     }

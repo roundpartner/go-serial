@@ -8,8 +8,11 @@ import (
 
 var config = &Config{}
 
-func StartServer() *http.Server {
-    config = ReadConfig()
+var configWorkingDirectory = ""
+
+func StartServer(workingDirectory string) *http.Server {
+    configWorkingDirectory = workingDirectory
+    config = ReadConfig(workingDirectory)
 
     http.HandleFunc("/", handler)
     server := &http.Server{Addr: "127.0.0.1:53231"}
@@ -26,5 +29,5 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
     fmt.Fprint(w, string(configJson))
 
-    WriteConfig(*config)
+    WriteConfig(configWorkingDirectory, *config)
 }
