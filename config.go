@@ -10,8 +10,7 @@ type Config struct {
 	Min  int `json:"min"`
 }
 
-func WriteConfig() {
-	config := Config{Min: 1}
+func WriteConfig(config Config) {
 	configJson, _ := json.Marshal(config)
 	ioutil.WriteFile("config.json", configJson, 0644)
 }
