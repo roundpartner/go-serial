@@ -1,14 +1,14 @@
 package go_serial
 
 import (
-    "testing"
-    "os"
+	"os"
+	"testing"
 )
 
 func TestWriteConfig(t *testing.T) {
     beforeTest()
     config := Config{Min: 1}
-	WriteConfig("", config)
+    WriteConfig("", config)
 }
 
 func TestConfigExists(t *testing.T) {
